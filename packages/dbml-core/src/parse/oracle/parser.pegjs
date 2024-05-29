@@ -309,7 +309,11 @@ path_name = names:(identifier _ "." _)* {
   return { dbName, schemaName }
 }
 
-table_name "valid table name" = pathName:path_name name:identifier {
+table_name "valid table name" = open:"`"? pathName:path_name name:identifier close:"`"? {
+  if ((open && !close) || (!open && close)) {
+    throw new Error("Mismatched quotes around table name.");
+  }
+  console.log()
   return { ...pathName, name }
 }
 
@@ -321,8 +325,11 @@ enum_name "valid enum name" = pathName:path_name? name:identifier {
 string_constant "string" = "'" c:char_inside_single_quote+ "'" {
         return c.join('');
 }
-char_inside_single_quote = "''" { return "'" }
-        / [^\']
+char_inside_single_quote = '\\' "'" {return "\\'"; }
+  / !"'" SourceCharacter { return text(); }
+SourceCharacter
+  = .
+
 
 // identifier (table name, column name)
 identifier = '"' c:char_inside_double_quote+ '"' {
@@ -331,6 +338,9 @@ identifier = '"' c:char_inside_double_quote+ '"' {
         / c:character+ {
                 return c.join('');
         }
+        / "`" c:character+ "`" {
+  return c.join('');
+}
 char_inside_double_quote = '""' { return '"' }
         / [^\"]
 
@@ -445,13 +455,13 @@ newline "newline" = "\r\n" / "\n"
 _ "space" = (cmt/sp/tab/newline)*
 __ "space" = (cmt/sp/tab/newline)+
 cmt "comment" = "--" [^\n]* / "/*" (!"*/" .)* "*/" semicolon?
-character "letter, number or underscore" = [a-z0-9_]i
+character "letter, number, underscore, or Chinese character" = [a-z0-9_\u4e00-\u9fff]i
 operator = "&&" / "=" // using for EXCLUDE in Create_table
 
 
 create_table_normal =
         _ CREATE __ ( ( GLOBAL __ / LOCAL __ )? ( TEMPORARY / TEMP ) __ / UNLOGGED __)? TABLE (__ IF_NOT_EXISTS)? __ table_name:table_name _ "(" _
-        table_properties:table_properties _ ")"
+        table_properties:table_properties _ ")" (_ "ENGINE"i _ ("=" _)? engine:identifier)?
         (__ INHERITS _ "(" _ parent_tables:table_names _ ")")?
         (__ PARTITION __ BY __ (RANGE/LIST/HASH) _ "(" _ (column_name/"("_ expression _ ")") (__ COLLATE __ collation:identifier)? (__ opclasses)? _ ")" )?
         (__ WITH _ "(" _ storage_parameters _ ")"/__ WITH __ OIDS/__ WITHOUT __ OIDS)?
@@ -591,7 +601,7 @@ column_constraint = constraint_name:(CONSTRAINT __ constraint_name:identifier __
         / NULL { return { type: "not_null" , value: false } }
         / CHECK _ "("_ expression _")" (__ NO __ INHERIT)? { return { type: "not_supported" } }
         / DEFAULT __ default_expr:default_expr { return { type: "dbdefault", value: default_expr } }
-        / GENERATED __ (ALWAYS/ BY __ DEFAULT) __ AS __ IDENTITY { return { type: "increment" } } // (_ "("_ sequence_options _ ")")? { return { type: "not_supported" } }
+        / GENERATED __ (ALWAYS __/ BY __ DEFAULT __)? AS __ IDENTITY { return { type: "increment" } } // (_ "("_ sequence_options _ ")")? { return { type: "not_supported" } }
         / UNIQUE (__ index_parameters)? { return { type: "unique" } }
         / PRIMARY_KEY (__ index_parameters)? { return { type: "pk" } }
         / REFERENCES __ reftable:table_name refcolumn:(_ "(" _ refcolumn:column_name _ ")" {return refcolumn})? (__ MATCH __ FULL/__ MATCH __ PARTIAL/__ MATCH __ SIMPLE)?
