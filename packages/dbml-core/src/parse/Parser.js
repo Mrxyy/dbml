@@ -10,8 +10,8 @@ import { parse } from './ANTLR/ASTGeneration';
 import { CompilerError } from './error';
 
 class Parser {
-  constructor (DBMLCompiler) {
-    this.DBMLCompiler = DBMLCompiler || new Compiler();
+  constructor (dbmlCompiler) {
+    this.DBMLCompiler = dbmlCompiler || new Compiler();
   }
 
   static parseJSONToDatabase (rawDatabase) {
@@ -35,6 +35,31 @@ class Parser {
     return postgresParser.parse(str);
   }
 
+  static parseDBMLToJSONv2 (str, dbmlCompiler) {
+    const compiler = dbmlCompiler || new Compiler();
+
+    compiler.setSource(str);
+
+    const diags = compiler.parse.errors().map((error) => ({
+      message: error.diagnostic,
+      location: {
+        start: {
+          line: error.nodeOrToken.startPos.line + 1,
+          column: error.nodeOrToken.startPos.column + 1,
+        },
+        end: {
+          line: error.nodeOrToken.endPos.line + 1,
+          column: error.nodeOrToken.endPos.column + 1,
+        },
+      },
+      code: error.code,
+    }));
+
+    if (diags.length > 0) throw CompilerError.create(diags);
+
+    return compiler.parse.rawDb();
+  }
+
   static parseDBMLToJSON (str) {
     return dbmlParser.parse(str);
   }
@@ -47,8 +72,11 @@ class Parser {
     return mssqlParser.parseWithPegError(str);
   }
 
-  static parseOracleToJSON (str) {
+  static parseOracleToJSON(str) {
     return oracleParser.parse(str);
+  }
+  static parseSnowflakeToJSON (str) {
+    return parse(str, 'snowflake');
   }
 
   static parse (str, format) {
@@ -71,6 +99,10 @@ class Parser {
           rawDatabase = Parser.parsePostgresToJSONv2(str);
           break;
 
+        case 'snowflake':
+          rawDatabase = Parser.parseSnowflakeToJSON(str);
+          break;
+
         case 'postgresLegacy':
           rawDatabase = Parser.parsePostgresToJSON(str);
           break;
@@ -79,27 +111,8 @@ class Parser {
           rawDatabase = Parser.parseDBMLToJSON(str);
           break;
 
-        case 'dbmlv2': {
-          this.DBMLCompiler.setSource(str);
-
-          const diags = this.DBMLCompiler.parse.errors().map((error) => ({
-            message: error.diagnostic,
-            location: {
-              start: {
-                line: error.nodeOrToken.startPos.line + 1,
-                column: error.nodeOrToken.startPos.column + 1,
-              },
-              end: {
-                line: error.nodeOrToken.endPos.line + 1,
-                column: error.nodeOrToken.endPos.column + 1,
-              },
-            },
-            code: error.code,
-          }));
-
-          if (diags.length > 0) throw CompilerError.create(diags);
-        }
-          rawDatabase = this.DBMLCompiler.parse.rawDb();
+        case 'dbmlv2':
+          rawDatabase = Parser.parseDBMLToJSONv2(str, this.DBMLCompiler);
           break;
 
         case 'schemarb':

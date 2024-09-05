@@ -9,7 +9,9 @@ describe('@dbml/core - importer', () => {
     const fileExtension = getFileExtension(format);
     const input = require(`./${testDir}/input/${fileName}.in.${fileExtension}`);
     const output = require(`./${testDir}/output/${fileName}.out.dbml`);
+
     const res = importer.import(input, format);
+
     expect(res).toBe(output);
     /* eslint-enable */
   };
@@ -33,6 +35,10 @@ describe('@dbml/core - importer', () => {
 
   test.each(scanTestNames(__dirname, 'oracle_importer/input'))('oracle_importer/%s', (name) => {
     runTest(name, 'oracle_importer', 'oracle');
+  });
+
+  test.each(scanTestNames(__dirname, 'snowflake_importer/input'))('snowflake_importer/%s', (name) => {
+    runTest(name, 'snowflake_importer', 'snowflake');
   });
   /* eslint-enable */
 });

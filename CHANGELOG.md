@@ -1,3 +1,166 @@
+## v3.8.0 (2024-08-27)
+
+#### :memo: Documentation
+* `dbml-core`
+  * [#624](https://github.com/holistics/dbml/pull/624) Fix erroneous examples in document for Table Groups ([@thonx-holistics](https://github.com/thonx-holistics))
+
+#### :rocket: New Feature
+* `dbml-cli`, `dbml-connector`
+  * [#622](https://github.com/holistics/dbml/pull/622) Add bigquery connector ([@huyleminh01](https://github.com/huyleminh01))
+* `dbml-cli`, `dbml-connector`, `dbml-core`
+  * [#623](https://github.com/holistics/dbml/pull/623) Add Snowflake connector ([@huyphung1602](https://github.com/huyphung1602))
+
+#### :robot: Dependencies Update
+* [#621](https://github.com/holistics/dbml/pull/621) Bump micromatch from 4.0.5 to 4.0.8 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 3
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- Tho Nguyen ([@thonx-holistics](https://github.com/thonx-holistics))
+- harryphung ([@huyphung1602](https://github.com/huyphung1602))
+
+## v3.7.4 (2024-08-26)
+
+#### :memo: Documentation
+* `dbml-core`, `dbml-parse`
+  * [#619](https://github.com/holistics/dbml/pull/619) Support colors for Table Groups ([@thonx-holistics](https://github.com/thonx-holistics))
+
+#### :rocket: New Feature
+* `dbml-core`, `dbml-parse`
+  * [#619](https://github.com/holistics/dbml/pull/619) Support colors for Table Groups ([@thonx-holistics](https://github.com/thonx-holistics))
+
+#### Committers: 2
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- Tho Nguyen ([@thonx-holistics](https://github.com/thonx-holistics))
+
+## v3.7.3 (2024-08-19)
+
+#### :memo: Documentation
+* `dbml-connector`, `dbml-core`
+  * [#617](https://github.com/holistics/dbml/pull/617) Update readme for dbml core and connector ([@huyleminh01](https://github.com/huyleminh01))
+* Other
+  * [#615](https://github.com/holistics/dbml/pull/615) Docs - Add document for connector ([@huyleminh01](https://github.com/huyleminh01))
+  * [#614](https://github.com/holistics/dbml/pull/614) Add syntax manuals for table group notes ([@TeaNguyen](https://github.com/TeaNguyen))
+
+#### :bug: Bug Fix
+* `dbml-core`, `dbml-parse`
+  * [#616](https://github.com/holistics/dbml/pull/616) Fix wrong suggestion behaviors for Table Groups ([@thonx-holistics](https://github.com/thonx-holistics))
+* `dbml-parse`
+  * [#606](https://github.com/holistics/dbml/pull/606) Parse/fix/wrongly extract index position ([@Huy-DNA](https://github.com/Huy-DNA))
+
+#### Committers: 4
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- Thi Nguyen ([@TeaNguyen](https://github.com/TeaNguyen))
+- Tho Nguyen ([@thonx-holistics](https://github.com/thonx-holistics))
+- Đỗ Nguyễn An Huy ([@Huy-DNA](https://github.com/Huy-DNA))
+
+## v3.7.2 (2024-08-14)
+
+#### :memo: Documentation
+* [#605](https://github.com/holistics/dbml/pull/605) Docs - Add document for database connector ([@huyleminh01](https://github.com/huyleminh01))
+
+#### :rocket: New Feature
+* `dbml-cli`, `dbml-connector`, `dbml-core`
+  * [#611](https://github.com/holistics/dbml/pull/611) Add @dbml/connector ([@huyphung1602](https://github.com/huyphung1602))
+* `dbml-core`, `dbml-parse`
+  * [#601](https://github.com/holistics/dbml/pull/601) Support notes for table group ([@thonx-holistics](https://github.com/thonx-holistics))
+
+#### Committers: 3
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- Tho Nguyen ([@thonx-holistics](https://github.com/thonx-holistics))
+- harryphung ([@huyphung1602](https://github.com/huyphung1602))
+
+## v3.7.1 (2024-08-13)
+
+#### :bug: Bug Fix
+* `dbml-cli`, `dbml-core`
+  * [#609](https://github.com/holistics/dbml/pull/609) Fix - Clean build cache and required using node 18 or higher ([@huyleminh01](https://github.com/huyleminh01))
+
+#### Committers: 1
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+
+## v3.7.0 (2024-08-12)
+
+#### :rocket: New Feature
+* `dbml-cli`, `dbml-core`
+  * [#596](https://github.com/holistics/dbml/pull/596) Add database connectors ([@huyphung1602](https://github.com/huyphung1602))
+
+#### Committers: 3
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- NQPhuc ([@NQPhuc](https://github.com/NQPhuc))
+- harryphung ([@huyphung1602](https://github.com/huyphung1602))
+
+## v3.6.2 (2024-07-31)
+
+#### :running_woman: Performance
+* `dbml-core`
+  * [#590](https://github.com/holistics/dbml/pull/590) Improve DBML normalize performance ([@thonx-holistics](https://github.com/thonx-holistics))
+
+#### :house_with_garden: Internal
+* `dbml-parse`
+  * [#592](https://github.com/holistics/dbml/pull/592) chore: config vite to gen .d.ts file on build ([@Huy-DNA](https://github.com/Huy-DNA))
+
+#### Committers: 3
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- Tho Nguyen ([@thonx-holistics](https://github.com/thonx-holistics))
+- Đỗ Nguyễn An Huy ([@Huy-DNA](https://github.com/Huy-DNA))
+
+## v3.6.1 (2024-07-23)
+
+#### :bug: Bug Fix
+* `dbml-parse`
+  * [#588](https://github.com/holistics/dbml/pull/588) fix: safe unwrapping in suggesting attribute value when name is blank ([@Huy-DNA](https://github.com/Huy-DNA))
+
+#### :robot: Dependencies Update
+* [#583](https://github.com/holistics/dbml/pull/583) build(deps): bump ws from 7.5.9 to 7.5.10 in /dbml-homepage ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- NQPhuc ([@NQPhuc](https://github.com/NQPhuc))
+- Đỗ Nguyễn An Huy ([@Huy-DNA](https://github.com/Huy-DNA))
+
+## v3.6.0 (2024-07-17)
+
+#### :rocket: New Feature
+* `dbml-cli`, `dbml-core`
+  * [#587](https://github.com/holistics/dbml/pull/587) Snowflake DDL Importer ([@huyphung1602](https://github.com/huyphung1602))
+
+#### :robot: Dependencies Update
+* [#581](https://github.com/holistics/dbml/pull/581) build(deps): bump braces from 3.0.2 to 3.0.3 in /dbml-homepage ([@dependabot[bot]](https://github.com/apps/dependabot))
+* [#582](https://github.com/holistics/dbml/pull/582) build(deps): bump braces from 3.0.2 to 3.0.3 ([@dependabot[bot]](https://github.com/apps/dependabot))
+
+#### Committers: 2
+- Nguyen Hoang ([@nguyenalter](https://github.com/nguyenalter))
+- harryphung ([@huyphung1602](https://github.com/huyphung1602))
+
+## v3.5.1 (2024-06-11)
+
+#### :bug: Bug Fix
+* `dbml-parse`
+  * [#579](https://github.com/holistics/dbml/pull/579) Fix/silent errors in compiler api stack container ([@Huy-DNA](https://github.com/Huy-DNA))
+
+#### Committers: 2
+- Nguyen Hoang ([@nguyenalter](https://github.com/nguyenalter))
+- Đỗ Nguyễn An Huy ([@Huy-DNA](https://github.com/Huy-DNA))
+
+## v3.5.0 (2024-06-04)
+
+#### :memo: Documentation
+* [#571](https://github.com/holistics/dbml/pull/571) Migrate - Remove old hompepage and rename docs folder to homepage ([@huyleminh01](https://github.com/huyleminh01))
+* [#570](https://github.com/holistics/dbml/pull/570) Fix - Rename file syntax to docs to keep old route ([@huyleminh01](https://github.com/huyleminh01))
+* [#568](https://github.com/holistics/dbml/pull/568) Docs - Migrate dbml homepage to docusaurus ([@huyleminh01](https://github.com/huyleminh01))
+
+#### :bug: Bug Fix
+* `dbml-parse`
+  * [#575](https://github.com/holistics/dbml/pull/575) Fix/remove tablegroup in schema ([@Huy-DNA](https://github.com/Huy-DNA))
+
+#### :rocket: New Feature
+* `dbml-core`
+  * [#574](https://github.com/holistics/dbml/pull/574) Export @dbml/core version ([@nguyenalter](https://github.com/nguyenalter))
+
+#### Committers: 3
+- Huy Le Minh ([@huyleminh01](https://github.com/huyleminh01))
+- Nguyen Hoang ([@nguyenalter](https://github.com/nguyenalter))
+- Đỗ Nguyễn An Huy ([@Huy-DNA](https://github.com/Huy-DNA))
+
 ## v3.4.3 (2024-04-26)
 
 #### :bug: Bug Fix
@@ -497,7 +660,7 @@
 * `dbml-cli`, `dbml-core`
   * [#240](https://github.com/holistics/dbml/pull/240) Support multiple schemas ([@NQPhuc](https://github.com/NQPhuc))
 * `dbml-cli`
-  * [#209](https://github.com/holistics/dbml/pull/209) Add --mssql option for sql2dbml CLI ([@NQPhuc](https://github.com/NQPhuc))      
+  * [#209](https://github.com/holistics/dbml/pull/209) Add --mssql option for sql2dbml CLI ([@NQPhuc](https://github.com/NQPhuc))
 
 #### :rocket: New Feature
 * `dbml-cli`, `dbml-core`
