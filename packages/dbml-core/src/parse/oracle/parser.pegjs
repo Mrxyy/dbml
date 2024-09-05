@@ -370,7 +370,7 @@ data_type "VALID TYPE" = c1:"CHARACTER"i _ c2:"VARYING"i _ args:("("expression")
       args
     }
   }
-/ "timestamp"i _ number:("(" _ numeric_constant _ ")" _)? (("without"i/"with"i) _ "time"i _ "zone"i)? dimensions:(array_extension)? {
+/ "timestamp"i _ number:("(" _ numeric_constant _ ")" _)? (("without"i/"with"i) (_ "local"i)? _ "time"i _ "zone"i)? dimensions:(array_extension)? {
   const args = number ? number[2] : null;
   return {
     type_name: (args !== null ? `timestamp(${args})`: `timestamp`) + (dimensions ? dimensions.map((dimension) => '[' + dimension + ']').join('') : ''),
@@ -601,7 +601,7 @@ column_constraint = constraint_name:(CONSTRAINT __ constraint_name:identifier __
         / NULL { return { type: "not_null" , value: false } }
         / CHECK _ "("_ expression _")" (__ NO __ INHERIT)? { return { type: "not_supported" } }
         / DEFAULT __ default_expr:default_expr { return { type: "dbdefault", value: default_expr } }
-        / GENERATED __ (ALWAYS __/ BY __ DEFAULT __)? AS __ IDENTITY { return { type: "increment" } } // (_ "("_ sequence_options _ ")")? { return { type: "not_supported" } }
+        / GENERATED __ (ALWAYS __/ BY __ DEFAULT __(ON __ NULL __))? AS __ IDENTITY { return { type: "increment" } } // (_ "("_ sequence_options _ ")")? { return { type: "not_supported" } }
         / UNIQUE (__ index_parameters)? { return { type: "unique" } }
         / PRIMARY_KEY (__ index_parameters)? { return { type: "pk" } }
         / REFERENCES __ reftable:table_name refcolumn:(_ "(" _ refcolumn:column_name _ ")" {return refcolumn})? (__ MATCH __ FULL/__ MATCH __ PARTIAL/__ MATCH __ SIMPLE)?
