@@ -72,9 +72,10 @@ class Parser {
     return mssqlParser.parseWithPegError(str);
   }
 
-  static parseOracleToJSON(str) {
+  static parseOracleToJSON (str) {
     return oracleParser.parse(str);
   }
+
   static parseSnowflakeToJSON (str) {
     return parse(str, 'snowflake');
   }
